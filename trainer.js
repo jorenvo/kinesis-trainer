@@ -48,6 +48,62 @@ var chords = [
                 'alt': true,
             },
         ]
+    }, {
+        'description': '↑',
+        'keys': [
+            {
+                'character': 'p',
+                'ctrl': true,
+            },
+        ]
+    }, {
+        'description': '↓',
+        'keys': [
+            {
+                'character': 'n',
+                'ctrl': true,
+            },
+        ]
+    }, {
+        'description': '←',
+        'keys': [
+            {
+                'character': 'b',
+                'ctrl': true,
+            },
+        ]
+    }, {
+        'description': '→',
+        'keys': [
+            {
+                'character': 'f',
+                'ctrl': true,
+            },
+        ]
+    }, {
+        'description': 'quit',
+        'keys': [
+            {
+                'character': 'g',
+                'ctrl': true,
+            },
+        ]
+    }, {
+        'description': 'word ←',
+        'keys': [
+            {
+                'character': 'b',
+                'alt': true,
+            },
+        ]
+    }, {
+        'description': 'word →',
+        'keys': [
+            {
+                'character': 'f',
+                'alt': true,
+            },
+        ]
     },
 ];
 
