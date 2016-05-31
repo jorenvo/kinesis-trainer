@@ -104,7 +104,59 @@ var chords = [
                 'alt': true,
             },
         ]
-    },
+    }, {
+        'description': 'kill line',
+        'keys': [
+            {
+                'character': 'k',
+                'ctrl': true,
+            },
+        ]
+    }, {
+        'description': 'kill buffer',
+        'keys': [
+            {
+                'character': 'x',
+                'ctrl': true,
+            }, {
+                'character': 'k',
+            },
+        ]
+    }, {
+        'description': 'paragraph ↑',
+        'keys': [
+            {
+                'character': 'p',
+                'ctrl': true,
+                'alt': true,
+            },
+        ]
+    }, {
+        'description': 'paragraph ↓',
+        'keys': [
+            {
+                'character': 'n',
+                'ctrl': true,
+                'alt': true,
+            },
+        ]
+    }, {
+        'description': 'query replace',
+        'keys': [
+            {
+                'character': '%',
+                'alt': true,
+            },
+        ]
+    }, {
+        'description': 'set mark',
+        'keys': [
+            {
+                'character': ' ',
+                'ctrl': true,
+            },
+        ]
+    }
 ];
 
 function display_chord (chord) {
@@ -147,7 +199,6 @@ $(document).on('keypress', function (e) {
         display_chord(chord_to_press);
 
         if (chord_to_press.keys.length === 0) {
-            console.log('new chord');
             ask_new_chord();
         }
     }
