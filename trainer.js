@@ -10,7 +10,7 @@ var chords = [
             },
         ]
     }, {
-        'description': 'save',
+        'description': 'save in emacs',
         'keys': [
             {
                 'character': 'x',
@@ -20,6 +20,22 @@ var chords = [
                 'ctrl': true,
             },
         ]
+    }, {
+        'description': 'go back in intellij',
+        'keys': [
+            {
+                'character': '[',
+                'meta': true,
+            }
+        ],
+    }, {
+        'description': 'go to definition in intellij',
+        'keys': [
+            {
+                'character': 'b',
+                'meta': true,
+            }
+        ],
     }, {
         'description': 'open file',
         'keys': [
@@ -32,79 +48,6 @@ var chords = [
             },
         ]
     }, {
-        'description': 'select entire line',
-        'keys': [
-            {
-                'character': 'a',
-                'ctrl': true,
-            }, {
-                'character': ' ',
-                'ctrl': true,
-            }, {
-                'character': 'e',
-                'ctrl': true,
-            }, {
-                'character': 'w',
-                'alt': true,
-            },
-        ]
-    }, {
-        'description': '↑',
-        'keys': [
-            {
-                'character': 'p',
-                'ctrl': true,
-            },
-        ]
-    }, {
-        'description': '↓',
-        'keys': [
-            {
-                'character': 'n',
-                'ctrl': true,
-            },
-        ]
-    }, {
-        'description': '←',
-        'keys': [
-            {
-                'character': 'b',
-                'ctrl': true,
-            },
-        ]
-    }, {
-        'description': '→',
-        'keys': [
-            {
-                'character': 'f',
-                'ctrl': true,
-            },
-        ]
-    }, {
-        'description': 'quit',
-        'keys': [
-            {
-                'character': 'g',
-                'ctrl': true,
-            },
-        ]
-    }, {
-        'description': 'word ←',
-        'keys': [
-            {
-                'character': 'b',
-                'alt': true,
-            },
-        ]
-    }, {
-        'description': 'word →',
-        'keys': [
-            {
-                'character': 'f',
-                'alt': true,
-            },
-        ]
-    }, {
         'description': 'kill line',
         'keys': [
             {
@@ -113,50 +56,127 @@ var chords = [
             },
         ]
     }, {
-        'description': 'kill buffer',
+        'description': 'reverse search',
         'keys': [
             {
-                'character': 'x',
+                'character': 'r',
                 'ctrl': true,
-            }, {
-                'character': 'k',
             },
         ]
     }, {
-        'description': 'paragraph ↑',
+        'description': 'copy in emacs',
         'keys': [
             {
-                'character': 'p',
-                'ctrl': true,
+                'character': '∑',
+                'character_display': 'w',
                 'alt': true,
             },
         ]
     }, {
-        'description': 'paragraph ↓',
+        'description': 'paste in emacs',
         'keys': [
             {
-                'character': 'n',
-                'ctrl': true,
-                'alt': true,
-            },
-        ]
-    }, {
-        'description': 'query replace',
-        'keys': [
-            {
-                'character': '%',
-                'alt': true,
-            },
-        ]
-    }, {
-        'description': 'set mark',
-        'keys': [
-            {
-                'character': ' ',
+                'character': 'y',
                 'ctrl': true,
             },
         ]
-    }
+    }, {
+        'description': 'undo in emacs',
+        'keys': [
+            {
+                'character': '_',
+                'ctrl': true,
+            },
+        ]
+    }, {
+        'description': 'comment/uncomment',
+        'keys': [
+            {
+                'character': '/',
+                'meta': true,
+            },
+        ]
+    }, {
+        'description': 'generic undo',
+        'keys': [
+            {
+                'character': 'z',
+                'meta': true,
+            },
+        ]
+    }, {
+        'description': 'quit/interrupt',
+        'keys': [
+            {
+                'character': 'c',
+                'ctrl': true,
+            },
+        ]
+    }, {
+        'description': 'disconnect',
+        'keys': [
+            {
+                'character': 'd',
+                'ctrl': true,
+            },
+        ]
+    }, {
+        'description': 'escape',
+        'keys': [
+            {
+                'character': 'Escape',
+            },
+        ]
+    }, {
+        'description': 'backtick',
+        'keys': [
+            {
+                'character': '`',
+            },
+        ]
+    }, {
+        'description': 'equals',
+        'keys': [
+            {
+                'character': '=',
+            },
+        ]
+    }, {
+        'description': 'plus',
+        'keys': [
+            {
+                'character': '+',
+            },
+        ]
+    }, {
+        'description': 'semicolon',
+        'keys': [
+            {
+                'character': ';',
+            },
+        ]
+    }, {
+        'description': 'square bracket open',
+        'keys': [
+            {
+                'character': '[',
+            },
+        ]
+    }, {
+        'description': 'square bracket close',
+        'keys': [
+            {
+                'character': ']',
+            },
+        ]
+    }, {
+        'description': 'backspace',
+        'keys': [
+            {
+                'character': 'Backspace',
+            },
+        ]
+    },
 ];
 
 function display_chord (chord) {
@@ -169,7 +189,11 @@ function display_chord (chord) {
         if (a.alt) {
             string += "M-";
         }
-        string += a.character;
+        if (a.meta) {
+            string += "⌘-";
+        }
+
+        string += a.character_display || a.character;
 
         return string;
     }).join(' '));
@@ -194,7 +218,8 @@ $(document).ready(function () {
 
 $(document).on('keypress', function (e) {
     var key_to_press = chord_to_press.keys[0];
-    if (e.key == key_to_press.character && e.ctrlKey == (key_to_press.ctrl || false) && e.altKey == (key_to_press.alt || false)) {
+    console.log(`alt is pressed ${e.altKey}, key is ${e.key}`);
+    if (e.key == key_to_press.character && e.ctrlKey == (key_to_press.ctrl || false) && e.altKey == (key_to_press.alt || false) && e.metaKey == (key_to_press.meta || false)) {
         chord_to_press.keys.shift();
         display_chord(chord_to_press);
 
